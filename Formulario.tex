@@ -1,0 +1,74 @@
+\subsection*{Teoria perturbativa indipendente dal tempo}
+L'idea è che abbiamo una hamiltoniana $H$ che è la somma di una hamiltoniana $H_0$ imperturbata e una perturbazione $V'$:
+
+\begin{equation*}
+   H=H_0 + V'
+\end{equation*}
+
+Il motivo per cui indichiamo la perturbazione in tal modo è che in generale la hamiltoniana imperturbata potrebbe già avere parte del potenziale, cioè potrebbe essere nella forma $H_0=K + V$ con $K$ termine cinetico e $V$ termine di potenziale
+
+Si parte dall'idea che noi conosciamo il sistema governato da $H_0$, quindi conosciamo sia i livelli di energia imperturbati $E_n^{(0)}$ che gli autostati $\ket*{n^{(0)}}$. In altri termini, conosciamo il problema
+
+\begin{equation*}
+   H_0\ket*{n^{(0)}}
+   =E_n^{(0)}\ket*{n^{(0)}}
+\end{equation*}
+
+Quello che ci chiediamo è qual è la correzione ai livelli di energia imperturbati e agli autostati imperturbati a causa di $V'$. Omettendo i passaggi visti nella teoria, quello che andiamo a guardare negli esercizi in genere è al massimo il secondo ordine. La correzione al primo ordine è data dagli elementi di matrice del potenziale $V'$, sugli autostati imperturbati:
+
+\begin{equation*}
+   \delta E_n^{(1)}
+   =E_n^{(1)} - E_n^{(0)}
+   =\mel*{n^{(0)}}{V'}{n^{(0)}}
+\end{equation*}
+
+Per quanto riguarda la correzione al secondo ordine, essa è data da dall'elemento di matrice di $V'$ tra lo stato imperturbato $\ket*{n^{(0)}}$ e lo stato corretto al primo ordine $\ket*{n^{(1)}}$
+
+\begin{equation*}
+   \delta E_n^{(2)}
+   =\mel*{n^{(0)}}{V'}{n^{(1)}}
+\end{equation*}
+
+Da tale espressione deduciamo che per avere una correzione all'ordine $n$-esimo ci servono gli autostati corretti fino all'ordine $n-1$. In particolare, per il secondo ordine ci serve lo stato corretto al primo ordine che è dato da
+
+\begin{equation*}
+   \ket*{n^{(1)}}
+   =\sum_{k \neq n} \ket*{k^{(0)}} \frac{V'_{k,n}}{E_n^{(0)} - E_k^{(0)}}
+   \qq{dove}
+   V'_{k,n}=\mel*{k^{(0)}}{V'}{n^{(0)}}
+\end{equation*}
+
+Inserendo tale espressione in quella di sopra otteniamo
+
+\begin{equation*}
+   \delta E_n^{(2)}
+   =\sum_{k \neq n} \frac{| \hspace{-0.1cm} \mel*{n^{(0)}}{V'}{k^{(0)}} \hspace{-0.1cm} |^2}{E_n^{(0)} - E_k^{(0)}}
+\end{equation*}
+
+Ci si può inoltre chiedere quando è valida la teoria perturbativa. Il criterio per stabilirlo è il seguente: il rapporto tra la correzione al primo ordine di un certo livello e la differenza tra l'energia del medesimo livello e quella del consecutivo deve essere molto minore di 1. In formule:
+
+\begin{equation*}
+   \biggl| \frac{\delta E_n^{(1)}}{ E_n^{(0)} - E_{n+1}^{(0)} } \biggr| \ll 1
+\end{equation*}
+
+\subsection*{Teoria perturbativa dipendente dal tempo}
+
+Nella teoria perturbativa dipendente dal tempo consideriamo una hamiltoniana che ha un termine $H_0$ in cui non compare il tempo in maniera esplicita più un potenziale che dipende dal tempo:
+
+\begin{equation*}
+   H=H_0 + V(t)
+\end{equation*}
+
+In questo caso c'è un autostato $\ket{j}$ inizialmente popolato e la presenza del potenziale $V(t)$ può portare a delle transizioni verso uno stato $\ket*{n}$ con $n \neq j$. Uno degli scopi principali della teoria perturbativa dipendente dal tempo è quindi quello di calcolare qual è la probabilità di tale transizione. L'ampiezza della transizione $d_{j \to n}$ è data da
+
+\begin{equation*}
+   d_{j \to n}=-\frac{i}{\hbar} \int_{t_0}^{t} \dd{t'} e^{i \omega_{n,j} t'} V_{n,j}
+\end{equation*}
+
+dove
+
+\begin{equation*}
+   \omega_{n,j}=\frac{E_n - E_j}{\hbar}
+   \qq{,}
+   V_{n,j}=\mel*{n}{V(t)}{j}
+\end{equation*}

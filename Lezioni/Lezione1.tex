@@ -1,0 +1,499 @@
+\begin{esercizio}[(07/02/2018 n°1)]
+   An atom has a nucleus of charge $Z$ and one electron. The nucleus has radius $R$ inside which the charge is distributed. Assuming that the effect of the finite size of the nucleus can be described by the following potential:
+   \begin{equation*}
+      V(r)=
+      \begin{dcases}
+         -\frac{Z e^2}{R} \frac{r}{R} & \text{for } r<R\\
+         -\frac{Z e^2}{r} & \text{for } r \geq R
+      \end{dcases}
+   \end{equation*}
+   \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
+      \item Use perturbation theory to calculate the first order correction to the ground state for $Z=8$ and $A=16$. (It is known that $R=R_0A^{\frac{1}{3}}$ with $R_0=1.2 \cdot 10^{-15} \; \rm m=1.2 \; fm$)
+      \item Do you expect perturbation theory to be more valid for larger $A$?\footnotemark Justify.
+   \end{enumerate}
+   Hint:
+   \begin{gather*}
+      E_1^{(0)}=-\frac{Z^2 e^2}{2a_0}
+      \qq{with}
+      a_0=\frac{\hbar^2}{mc^2}
+      \qq{,}
+      \frac{R^2}{2a_0}=13.6 \text{ eV}
+      \\
+      R_{1,0}=2\qty( \frac{Z}{a_0} )^{\frac{3}{2}} a^{-Zr/a_0}
+   \end{gather*}
+\end{esercizio}
+\begin{soluzione}
+   \footnotetext{Questa richiesta ci sta implicitamente dicendo di fissare il valore di $Z$ e far variare soltanto $A$.}
+   Per prima cosa è conveniente, quando possibile, riportare in un grafico l'andamento del potenziale. In questo caso il potenziale assume la forma di una retta con pendenza negativa fino a $r=R$ (cioè fino alla \textit{size} del nucleo), dopodiché diventa un'iperbole. Pertanto, graficamente il potenziale apparirà come segue:
+
+   \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=1.6]
+         \draw[->] (0,-2.2) -- (0,1) node[above] {$V$};
+         \draw[->] (-1,0) -- (4.2,0) node[right] {$r$};
+         \draw[dotted] (1,-1) -- (1,0) node[above] {$R$};
+         \draw[thick,dashed,gray] plot[smooth,domain=0.5:1] (\x,-1/\x) -- plot[smooth,domain=1:2] (\x,-\x);
+         \draw[thick,red!60!black] plot[smooth,domain=0:1] (\x,-\x) -- plot[smooth,domain=1:4] (\x,-1/\x);
+      \end{tikzpicture}
+   \end{figure}
+
+   Osserviamo adesso che il sistema in esame è un atomo idrogenoide, pertanto il problema si può affrontare nella stessa maniera con cui trattiamo l'atomo di idrogeno avendo però carica $Z$ diversa da 1.
+   
+   Osserviamo inoltre che per $r \geq R$ il potenziale $V(r)$ assume proprio la forma del potenziale dell'atomo idrogenoide, per cui la hamiltoniana sarà quella dell'atomo idrogenoide, che ricordiamo essere
+
+   \begin{equation*}
+      H_{\rm idrogenoide}
+      =\frac{p^2}{2m} - \frac{Ze^2}{r}
+   \end{equation*}
+
+   Quello che vogliamo è che questa sia la nostra $H_0$,\footnote{Osserviamo che tale hamiltoniana ha una parte di potenziale, ma ciò non ci spaventa perché conosciamo esattamente tale problema.} in quanto ne conosciamo autovalori ed autofunzioni. \E in quest'ottica che capiamo come impostare il problema: nella regione 'nuova', cioè quella per $r<R$ in cui è presente il potenziale dovuto alla distribuzione di carica nella finite size del nucleo, tale potenziale deve essere considerato come perturbazione rispetto al potenziale dell'atomo idrogenoide, per cui dobbiamo esprimerlo in modo da ottenere il potenziale di $H_0$ più un termine perturbativo. Scriviamo dunque la hamiltoniana per la regione $r<R$:
+   
+   \begin{equation}
+      H=\frac{p^2}{2m} - \frac{Ze^2}{R} \frac{r}{R}
+      \label{eq:hamiltoniana_atomo_idrogenoide}
+   \end{equation}
+
+   Concentriamoci sul termine di potenziale e riscriviamolo aggiungendo e sottraendo il termine $\frac{Z e^2}{r}$:
+
+   \begin{equation*}
+      -\frac{Ze^2}{R} \frac{r}{R}
+      =-\frac{Ze^2}{R} \frac{r}{R} + \frac{Z e^2}{r} - \frac{Z e^2}{r}
+   \end{equation*}
+
+   Riordinando i termini e inserendoli in \eqref{eq:hamiltoniana_atomo_idrogenoide} possiamo riscrivere quest'ultima come
+
+   \begin{equation*}
+      H
+      =\frac{p^2}{2m} - \frac{Z e^2}{r} - \frac{Ze^2}{R} \frac{r}{R} + - \frac{Z e^2}{r}
+      =H_0 + V'
+   \end{equation*}
+   
+   dove $H_0$ è la hamiltoniana dell'atomo idrogenoide e $V'$ è il termine di perturbazione, il quale può essere riscritto come
+
+   \begin{equation*}
+      V'
+      =-\frac{Ze^2}{R} \frac{r}{R} + \frac{Z e^2}{r}
+      =-\frac{Z e^2}{R} \qty( \frac{r}{R} - \frac{R}{r} )
+   \end{equation*}
+
+   Il problema chiede qual è la correzione al ground state al primo ordine. Essa è data dall'elemento di matrice di $V'$ rispetto al ground state imperturbato, cioè rispetto a $\ket*{1,0,0}$. In formule\footnote{Notiamo che l'integrale radiale è esteso fino a $r=R$. Il motivo è che la perturbazione è nulla per $r \geq R$.}:
+   
+   \begin{gather*}
+      \delta E_1^{(1)}
+      =\mel*{1,0,0}{V'}{1,0,0}
+      =\int_{0}^{R} \dd{r} r^2 \int \dd{\Omega} \psi^*_{1,0,0}(r,\vartheta,\varphi) V'(r) \psi_{1,0,0}(r,\vartheta,\varphi)
+      =
+      \\
+      =-\int_{0}^{R} \dd{r} r^2 \int \dd{\Omega} |Y_{0,0}(\vartheta,\varphi)|^2 |R_{1,0}(r)|^2 \frac{Z e^2}{R} \qty( \frac{r}{R} - \frac{R}{r} )
+   \end{gather*}
+
+   dove nell'ultimo passaggio abbiamo esplicitato il potenziale e la funzione d'onda.
+
+   L'espressione della parte radiale è fornita dal testo, mentre per la parte angolare si ha
+
+   \begin{equation*}
+      \int \dd{\Omega} |Y_{0,0}(\vartheta,\varphi)|^2
+      =\frac{1}{4\pi} \int \dd{\Omega}
+      =\frac{1}{4\pi} 4\pi
+      =1
+   \end{equation*}
+
+   In definitiva possiamo riscrivere
+
+   \begin{gather*}
+      \mel*{1,0,0}{V'}{1,0,0}
+      =-\int_{0}^{R} \dd{r} r^2 4 \qty( \frac{Z}{a_0} )^3 e^{-2Zr/a_0} \frac{Ze^2}{R} \qty( \frac{r}{R} - \frac{R}{r} )
+      =\\
+      =-\frac{Z e^2}{R} \qty( \frac{Z}{a_0} )^3 4 \int_{0}^{R} \dd{r} r^2 \qty( \frac{r}{R} - \frac{R}{r} ) e^{2Zr/a_0}
+   \end{gather*}
+
+   Effettuiamo ora il cambio di variabile
+
+   \begin{equation*}
+      x=\frac{2Zr}{a_0}
+      \implies
+      r=\frac{a_0}{2Z}x
+      \implies
+      \dd{r}=\frac{a_0}{2Z} \dd{x}
+   \end{equation*}
+
+   che modifica l'intervallo di integrazione da $[0,R]$ in $[0,\alpha]$, con $\alpha=2ZR/a_0$. Dopo alcuni passaggi si giunge all'integrale
+
+   \begin{equation}
+      \frac{Ze^2}{2R} \int_{0}^{\alpha} \dd{x} e^{-x} \qty( \alpha x - \frac{x^3}{\alpha} )
+      \label{eq:integrale_dopo_sostituzione}
+   \end{equation}
+
+   Questi integrali vanno risolti per parti. In particolare si trova che
+
+   \begin{gather*}
+      \int_{0}^{\alpha} \dd{x} e^{-x} x
+      =-e^{-\alpha} (\alpha + 1) + 1
+      \\[0.1cm]
+      \int_{0}^{\alpha} \dd{x} e^{-x} x^3
+      =-e^{-\alpha} (\alpha^3 + 3\alpha^2 + 6\alpha + 6) + 6
+   \end{gather*}
+
+   Da cui, inserendo tali risultati nell'espressione \eqref{eq:integrale_dopo_sostituzione}, otteniamo
+
+   \begin{equation*}
+      \frac{Ze^2}{2R} \int_{0}^{\alpha} \dd{x} e^{-x} \qty( \alpha x - \frac{x^3}{\alpha} )
+      =\frac{Z e^2}{2R} \qty[ \alpha - \frac{6}{\alpha} + e^{-\alpha}\qty( 2\alpha + 6 + \frac{6}{\alpha} ) ]
+   \end{equation*}
+
+   Osserviamo adesso che il coefficiente a moltiplicare davanti la parentesi quadra può essere riscritto come
+
+   \begin{equation*}
+      \frac{Z e^2}{2R}
+      =\frac{Z^2 e^2}{a_0} \frac{a_0}{2ZR}
+   \end{equation*}
+
+   Il primo fattore è uguale all'opposto del doppio dell'energia del ground state imperturbato, mentre il secondo termine, per come abbiamo definito $\alpha$, è uguale proprio ad $\alpha^{-1}$. In definitiva possiamo scrivere:
+
+   \begin{equation*}
+      \frac{Z e^2}{2R}
+      =-2E_1^{(0)} \frac{1}{\alpha}
+   \end{equation*}
+
+   e quindi avremo
+
+   \begin{equation}
+      \frac{Z e^2}{2R} \qty[ \alpha - \frac{6}{\alpha} + e^{-\alpha}\qty( 2\alpha + 6 + \frac{6}{\alpha} ) ]
+      =-2E_1^{(0)} \qty[ 1 - \frac{6}{\alpha^2} + e^{-\alpha}\qty( 2 + \frac{6}{\alpha} + \frac{6}{\alpha^2} ) ]
+      \label{eq:risultato_integrale_per_parti_con_sostituzione_hint}
+   \end{equation}
+
+   Arrivati a questo punto possiamo rispondere alla domanda a): abbiamo infatti trovato la correzione al primo ordine allo stato fondamentale, e adesso dobbiamo trovarla in particolare per $Z=8$ ed $A=16$. Cerchiamo quindi di stimare $\alpha$ per questi valori. Sfruttando il fatto che $R=R_0A^{\frac{1}{3}}$ riscriviamo $\alpha$ come
+
+   \begin{equation*}
+      \alpha
+      =\frac{2ZR}{a_0}
+      =\frac{3R_0}{a_0} Z A^{\frac{1}{3}}
+   \end{equation*}
+
+   dove abbiamo lasciato $A$ e $Z$ non espressi in modo da avere una formula che vale per qualsiasi atomo. Possiamo riscrivere ancora:
+   
+   \begin{equation*}
+      \frac{3R_0}{a_0} Z A^{\frac{1}{3}}
+      =\gamma A^{\frac{1}{3}}
+   \end{equation*}
+
+   dove\footnote{Questo valore si trova per $Z=8$. Il motivo per cui sostituiamo subito $Z$ è che il problema chiede dei ragionamenti su $A$, per cui possiamo considerare $Z$ fissato.} $\gamma=3.6 \cdot 10^{-4}$. Segue che per $A=16$ risulta $\alpha \approx 10^{-3} \ll 1$.
+   
+   Possiamo sfruttare il fatto che $\alpha \ll 1$ per avere un'espressione analitica: sviluppando in serie di Taylor l'esponenziale otteniamo:
+   
+   \begin{equation*}
+      e^{-\alpha}
+      =1 - \alpha + \frac{\alpha^2}{2}
+   \end{equation*}
+
+   dove ci siamo fermati al secondo ordine. Prestiamo attenzione a questo fatto: il motivo per cui ci siamo fermati al secondo ordine piuttosto che al primo è che nelle parentesi quadre dell'espressione \eqref{eq:risultato_integrale_per_parti_con_sostituzione_hint} abbiamo termini fino all'ordine $\alpha^{-2}$. Inserendo quindi tale espansione otteniamo
+
+   \begin{gather*}
+      1 - \frac{6}{\alpha^2} + e^{-\alpha}\qty( 2 + \frac{6}{\alpha} + + \frac{6}{\alpha^2} )
+   =1 - \frac{6}{\alpha^2} + \qty( 1 - \alpha + \frac{\alpha^2}{2} )\qty( 2 + \frac{6}{\alpha} + \frac{6}{\alpha^2} )
+   =\\
+   =1 - \frac{6}{\alpha^2} + 2 +\frac{6}{\alpha} + \frac{6}{\alpha^2} - 2\alpha - 6 - \frac{6}{\alpha} + \alpha^2 + 3\alpha + 3
+   =\alpha^2 + \alpha \approx \alpha
+   \end{gather*}
+   
+   dove nell'ultimo passaggio trascuriamo il termine $\alpha^2$ in quanto $\alpha \ll 1$.
+
+   In definitiva abbiamo trovato un'espressione analitica semplice per la correzione al primo ordine al ground state, che è
+
+   \begin{equation*}
+      \delta E_1^{(1)}=-2 \alpha E_1^{(0)}
+   \end{equation*}
+
+   da cui si trova, per $Z=8$ $A=16$,
+
+   \begin{equation*}
+      \delta E_1^{(1)}=1.6 \text{ eV}
+   \end{equation*}
+
+   A questo punto passiamo al quesito b). Per capire se la teoria perturbativa è valida, dobbiamo verificare che si abbia
+
+   \begin{equation*}
+      \biggl| \frac{ \delta E_1^{(1)} }{ E_1^{(0)} - E_{2}^{(0)} } \biggr| \ll 1
+   \end{equation*}
+
+   Abbiamo già calcolato $\delta E_1^{(1)}$, passiamo al calcolo di $E_1^{(0)} - E_{2}^{(0)}$: ricordando che per un atomo idrogenoide i livelli energetici sono dati da
+
+   \begin{equation*}
+      E_n=-\frac{Z^2 e^2}{2 a_0 n^2}
+   \end{equation*}
+
+   avremo
+
+   \begin{equation*}
+      E_1^{(0)} - E_{2}^{(0)}
+      =-\frac{Z^2 e^2}{2 a_0} \qty( 1 - \frac{1}{4} )
+      =-\frac{3}{4} \frac{Z^2 e^2}{2 a_0}
+      =-\frac{3}{4} E_1^{(0)}
+   \end{equation*}
+
+   In definitiva:
+
+   \begin{equation*}
+      \biggl| \frac{ \delta E_1^{(1)} }{ E_1^{(0)} - E_{2}^{(0)} } \biggr|
+      =\biggl| \frac{ -2 \alpha E_1^{(0)} }{ -\frac{3}{4} E_1^{(0)} } \biggr|
+      =\frac{8}{3} \alpha
+   \end{equation*}
+
+   Ricordiamo che abbiamo trovato
+
+   \begin{equation*}
+      \alpha=\gamma A^{\frac{1}{3}}
+   \end{equation*}
+
+   da cui sembrerebbe che all'aumentare di $A$ la teoria perturbativa sia sempre meno valida. Tuttavia, sostituendo il valore di $\gamma$, troviamo che
+
+   \begin{equation*}
+      \frac{8}{3} \cdot 3.6 \cdot 10^{-4} A^{\frac{1}{3}} \ll 1
+      \implies
+      A^{\frac{1}{3}} \ll 10^3
+      \implies
+      A \ll 10^9
+   \end{equation*}
+
+   il che significa che, per i valori che $A$ assume in natura, la teoria perturbativa è valida.
+\end{soluzione}
+
+\newpage
+
+\begin{esercizio}[(13/07/2018 n°2)]
+   A two-level system is described by the hamiltonian
+   \begin{equation*}
+      H_0=
+      \begin{pmatrix}
+         \Omega & 0\\
+         0 & 3\Omega
+      \end{pmatrix}
+      \hbar
+   \end{equation*}
+   The system is in the excited state. At time $t=0$ the following perturbation turned on for a long time $T$:
+   \begin{equation*}
+      H_1=
+      \begin{pmatrix}
+         0 & \Omega e^{i\omega t}\\
+         \Omega e^{-i\omega t} & 0\\
+      \end{pmatrix}
+      \hbar
+   \end{equation*}
+   \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
+      \item Find the transition amplitude to the ground state at $t>T$.
+      \item Is there a valure of $\omega/\Omega$ such that the probability to make transition reaches at most $0.5$?
+   \end{enumerate}
+\end{esercizio}
+\begin{soluzione}
+   \comment{
+   In questo problema abbiamo un sistema due livelli, quindi abbiamo solo un ground state e uno stato eccitato. Il sistema si trova nello stato eccitato, quindi l'unica transizione che può fare è verso il ground state. Per studiare il sistema dobbiamo studiare il problema agli autovalori
+   
+   \begin{equation*}
+      H_0\ket*{\varphi_{1,2}^{(0)}}
+      =E_{1,2}\ket*{\varphi_{1,2}^{(0)}}
+   \end{equation*}
+
+   In generale per trovare autovalori e autostati dovremmo diagonalizzare la matrice. In questo caso la matrice è già in forma diagonale, per cui possiamo dire subito che gli autostati sono:
+
+   \begin{eqnarray*}
+      \text{ground state} & \varphi_1^{(0)}
+      =
+      \begin{pmatrix}
+         1\\
+         0
+      \end{pmatrix}
+      & \text{con energia } E_1=\hbar \Omega
+      \\[0.1cm]
+      \text{excited state} & \varphi_2^{(0)}
+      =
+      \begin{pmatrix}
+         0\\
+         1
+      \end{pmatrix}
+      & \text{con energia } E_2=3\hbar \Omega
+   \end{eqnarray*}
+
+   \textbf{QUI}
+
+   di otto pagone di uno due zero. E quali sono questi reggi? Mi sogniate con Alizzo? No, non non do. Mi sogniate con Hegel De Van Aden. Che gennaia. Ora, questo è un esempio semplice, perché il gioco è male. Quindi vediamo subito che l'energia, che ho chiamato, che è la la bassa di l'olio. Ho chiamato quella più bassa, che è con una uguale a cattà di l'alto omega. E quello è lo stato decidato per uguale 3 a cattà di l'alto omega. In questo è il ground state. E questo è il site di state. Però chiaramente in generale, se vi raccontiamo che è qua l'olio omega, guarda, in quel quel dovete di ammalizzare. E trovare così sia l'energia che le otto stati. In questo caso, quindi, io chiamo i tre. Quindi le otto stati qua sono più o meno interpubbate. Uno zero, e più o meno due interpubbate. E il zero. Però non hai hai in questo caso. Non so bene perché ho che fare, per esempio, che scendere il primano, dove l'obbligo è in tutte le cose, sono tutte nuove. No, poi ovviamente le cose che avete fatto continuamente non avete problemi, che le le un sistema di valore, di valore, di condizionamento, valori. Però se avete tutti i patrovi, se non dovete perdere tempo, allezzamini queste cose. Quindi per esempio questa è una modificata, mettete omega, omega grande e che allenate. Però forse in mezzo non c'è bisogno se li fate continuamente. Allora, mia domanda. Transition, altitudine, tu te grand state. Tu dici, lo sarebbe la ponte, l'ho detto prima, quindi, ti dallo sadecidato, che quindi è due. La grand state, uno. Questo uguale a meno, qui, su un caddadiato, integrale da 0, a t grande. Perché chiaramente, dobbiamo considerare quando inizia questa perturbazione, dipendente al tempo. E poi dobbiamo considerare quando è che chiede di calcare questa transizione. Dice di calcolare la ponte e ti maggiori a t t Ok, quindi quindi integrare, lo faccio da 0 e t grande. Inizia, di e, i, omega 1 e 2, e, i, di 1. Omega 1 e 2 è uguale a meno, c'è 2 diviso, c'è un caddadiato. È uguale a meno, 2 è uguale a meno. Pi 1, 2 è l'elemento di matrice di H1, come chiamate H1. E lo stato iniziale è quello in cui stiamo calcolando la transizione. E questo, se si prendo la transizione che abbiamo per H1, e a pi 2, se si prendo questo, e stanno subito il momento che è casa, otteniamo il accadagliato, e, i, omega. Quindi, di, di, da 2 è 1, e, a, a, a, t grande, di, e, l'elemento, a, i, omegapiccolo, meno 2, omega grande. Omegapiccolo, accadagliato, omega grande. Prima di accadagliato, se mi accendiamo questo, è, omega, lo posso mettere fuori. Quindi, accadagliato, non semplifico, omegapiccolo, ho tutto fatto fuori. Quindi, svolgo l'integrale. E lo tengo, non, omega, omega, meno 2, non è grande, è elevato a, i, omega, omega, non è grande, è, no. E, scopri, quindi la prima domanda era, cioè, di calcolare la, la pieza di transizione non date valori numerici, quindi, che abbiamo trovato in questo? Di questa è la pieza di transizione, che è passare da vostro recitato, al stato mentale, dopo un tempo, di grande. Poi, la domanda di, ci chiede, invece, in tanto di calcolare la proprietà, che va bene, è successo, in certe come lo ho fatto, nella pieza di transizione, e però poi ci dà un'altra informazione, vuole sapere qual è il valore di questo rapporto, come capisco di, che è grande, tale che questa proprietà sia al massimo 0,5. La La che passare da uno a uno, è il denominato della pieza di transizione, passare da uno, e qui è uguale, come capato. Quindi, su un'oliva piccolo, un'oliva grande, è decorato. E' un'oliva grande, e, è uno, al quadrato. E' un'oliva grande, e, è è E' E' E' e meno i, o mega meno i, mega grande, di grande, è uno, e le notte vanno, o mega meno i, 2 mega grande, e non lo vanno. Sporgo il prodotto, e ottengo, che usiamo di svegliare il prodotto, e usiamo di farlo, che è in alfa, uguale, è in alfa, e meno in alfa, e e ottengo. Un momento, e, e, Allora, qui, ho usato un semplice fatto, che per il numero di prodotto, è da quadra uguale, e ottengo questo. Poi, ho semplice di svolte il prodotto, e dopo di che, ottengo, ottengo due tempi di questo tipo, e quindi applico, cosa ci dimenterò cos'è. Ecco, questo era il tipo di passaggio che dicevo, gli svolgo tutti, o no? Però va bene, viva l'indicazione, e e che li controllate a casa. Non so se era più veloce, o se è equivalente, se è essimo stato il trucco di scrivere quello come un seno, cioè quando ne abbiamo iniziato, è è di meno uno. Non è difficile fare così, cioè questo lo scrive come uno... Prendendo, mi sarebbe cose omegamezzi, meno omegagrande, penso. Perché se ne metterne in evidenza, mezzo a fase. E' il alfa meno uno, lo fa diventare. E' il alfa mezzi, e più si è alfa mezzi. Meno è elevata, meno gli alfa mezzi. Perché poi in realtà è la stessa cosa di là. Sì, è la stessa cosa. Meno gli alfa mezzi, in altri tempi lo fanno così, così avete tutte le... E poi mettendo in evidenza, qua avete il termine per fare il seno. Quindi in generale dico, non c'è un caso in cui conviene questa formula l'altra? No, no. Cioè alcune volte sì. Allora, pensiamo... In questo caso, in realtà... Sì, allora effettivamente la cosa ottenevamo... Però se ottenevamo sempre il seno, se ottenevamo la stessa cosa di l'auto. Cioè sono equivalenti, poi poi la cosa cosa l'auto. Potrebbero essere essere quadrato? No, effettivamente il seno al al Non dico facendo questa... Certo, vieni al seno, sì, sì. Finisci con le due valenti. Stiamo riflettendo se sono in unena o un'altra. Quindi questo è un caso di l'auto. E E alla stessa cosa. Com'è, in in in in sentite... Ok, grazie. Quindi questo diventa... Fatto, al quadrato. Com'è, con le mezze di river... Al quadrato... queste realmente, siccome già stiamo parlando di Atmos, non vuole sapere, sta parlando sempre di valori superiori così, Jocs, questo è minore uguale del termine che c'è davanti al servo è una cosa cosa di quattro, omega, migliore di quattro, quattro, grande ora noi vogliamo che questa probabilità sia il massimo di P2 per P1 sia minore di 0, quindi non la vogliamo di 0.5 e questo quindi vedendo questa spressione, cosa significa? 
+   
+   Significa il quale è il il e mezzo, ci lo esprimiamo di questo quale per avere quindi P2 in 1 minore di 0,5 come chiede il problema, minore quale la questa non dovrebbe essere seno di anfamezzi, non essere affabrato di anfamezzi, cioè la radice eh ma sopra ci abbiamo quadrato ah, sì, no ah, no, ma c'è un quadrato di solito, sì, sì, giusto quindi l'acqua quadrato si è la radice, sì, sì, certo e quindi cevamo da questa otteniamo 8, omega quadro, minore quale di omega quadro p, più 4, omega quadro quale al quale lato meno 4, omega p, omega grande e dividiamo, scuola che ci interessa qualcosa che sia omega picco di mezzo omega grande quindi dividiamo per omega grande e otteniamo omega di omega grande al quale lato meno 4, omega picco di omega grande, meno 4, omega quadro quale lato e c'è il quale quattro e il zero e il il quindi per questi valori per rapporto abbiamo che la probabilità sarà al massimo 0,5 come adesso è un un tre quindi come vedete in questo caso già il 0,5 il valore non è proprio molto minore di 1 però magari in molti casi reali poi in valore come questo 0,8 o 0,3 può andare bene e possiamo utilizzare la potenza di omega quadro ma ma questo caso il professore greco diceva che nel sistema due rivelli si può risolvere esattamente quindi la fine va bene il 0,5 perché nel senso questo è il valore perché abligiamo la teoria sul professore esattamente questo sì allora il riscosto è che in tutto voi dovete semplicemente farvi come un pittor di rivelli potete sapere applicare le teorie per studiare e quindi uno lo può fare non per forse su uno dei sistemi che non si risolvere esattamente non può fare anche a un quelli che si risolvere esattamente anzi in giocatore proprio con quelli che si risolvere esattamente nella ricetta per esempio un controllo cioè un controllo controllo cosa sicura o no che confronti per il che va bene quella che messi e tutto a dei punti di valutà poi ripeto, detto questo comunque è un modo di vedere la vostra comprensione di un riscosto della fisica ricetta va bene,
+
+   
+   
+   
+   \begin{equation*}
+      d_{2 \to 1}
+      =-\frac{i}{\hbar} \int_{0}^{T} \dd{t} e^{i\omega_{1,2} t} V_{1,2}
+      \qq{dove}
+      \omega_{1,2}
+      =\frac{E_1 - E_2}{\hbar}
+      =-2\Omega
+   \end{equation*}
+
+   \begin{equation*}
+      V_{1,2}
+      =\mel*{\varphi_1^{(0)}}{H_1}{\varphi_2^{(0)}}
+      =\hbar \Omega e^{i \omega t}
+   \end{equation*}
+
+   \begin{equation*}
+      d_{2 \to 1}
+      =-\frac{i}{\hbar} \int_{0}^{T} \dd{t} e^{i( \omega - 2\Omega ) t} \hbar \Omega
+      =-\frac{\Omega}{\omega - 2\Omega} \qty[ e^{i(\omega - 2\Omega)T} - 1 ]
+   \end{equation*}
+
+   \begin{equation*}
+      P_{2 \to 1}
+      =| d_{2 \to 1} |^2
+      =\frac{\Omega^2}{(\omega - 2\Omega)^2} \qty| e^{i(\omega - 2\Omega)T} - 1 |^2
+   \end{equation*}
+   
+   $|z|^2=z^*z$
+
+   \begin{gather*}
+      P_{2 \to 1}
+      =\frac{\Omega^2}{(\omega - 2\Omega)^2} \qty[ e^{-i(\omega - 2\Omega)T} - 1 ] \qty[ e^{i(\omega - 2\Omega)T} - 1 ]=
+      \\
+      =\frac{\Omega^2}{(\omega - 2\Omega)^2} \qty[ 1 - e^{i(\omega - 2\Omega)T} - e^{-i(\omega - 2\Omega)T} + 1 ]
+   \end{gather*}
+
+   \begin{equation*}
+      \cos{\alpha}=\frac{e^{i\alpha} + e^{-i\alpha}}{2}
+   \end{equation*}
+
+   \begin{equation*}
+      P_{2 \to 1}
+      =\frac{\Omega^2}{(\omega - 2\Omega)^2} \Bigl\{ 1 - \cos{ \bigl[ (\omega - 2\Omega) T \bigr] } \Bigr\}
+   \end{equation*}
+
+   \begin{equation*}
+      \sin{\qty( \frac{\alpha}{2} )}
+      =\pm \sqrt{ \frac{1 - \cos{\alpha}}{2} }
+   \end{equation*}
+
+   \begin{equation*}
+      P_{2 \to 1}
+      =\frac{\Omega^2}{(\omega - 2\Omega)^2} \sin^2{ \qty[ \frac{ (\omega - 2\Omega) T }{2} ] }
+   \end{equation*}
+
+   \begin{equation*}
+      8\Omega^2 \leq \omega^2 + 4\Omega^2 - 4\omega\Omega
+   \end{equation*}
+
+   \begin{equation*}
+      \qty( \frac{\omega}{\Omega} )^2 - 4\qty( \frac{\omega}{\Omega} ) - 4 \geq 0
+      \implies
+      \frac{\omega}{\Omega} \geq 2 ( 1 + \sqrt{2} ) \simeq 4.83
+   \end{equation*}
+   }
+\end{soluzione}
+
+\newpage
+
+\begin{esercizio}
+   An electron is under the potential
+   \begin{equation*}
+      V(x)=
+      \begin{dcases}
+         V_0 \sin{\qty( \frac{\pi}{L} x )} & \text{for } 0<x<L\\
+         +\infty & \text{otherwhise}\\
+      \end{dcases}
+   \end{equation*}
+   \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
+      \item Calculate the energy levels employing first-order perturbation theory.
+      \item What is the condition $V_0$ has to satisfy for perturbation theory to be valid for $n=1$ level? Is it valid for $V_0=0.4$ eV and $L=0.2$ nm for $n=1$ level and/or for the $n$ energy levels? (Explain)
+      \item At $t>0$ the potential becomes
+      \begin{equation*}
+         V(x)=V_0 \sin{\qty( \frac{\pi}{L} x )}\cos{(\omega t)}
+      \end{equation*}
+      Calculate the transition probability for $n=1$ to $n=3$ at time $T$ at the value of $\omega$ where it is maximal.
+      \item For $L=0.2$ nm and $V_0=0.4$ eV is time dependent perturbation theory expected to be valid if $T=\frac{15 \pi}{\omega_{1,3}}$?
+   \end{enumerate}
+   Hint:
+   \begin{gather*}
+      \int_{0}^{L} \dd{y} \sin^2{\qty( \frac{n\pi}{L} y )} \sin{\qty( \frac{\pi}{L} y )}
+      =\frac{L}{\pi} \frac{4n^2}{4n^2 - 1}
+      \\[0.1cm]
+      \int_{0}^{L} \dd{y} \sin{\qty( \frac{3\pi}{L} y )} \sin^2{\qty( \frac{\pi}{L} y )}
+      =-\frac{8 L}{30 \pi}
+   \end{gather*}
+\end{esercizio}
+\begin{soluzione}
+   \comment{
+   quindi, gritter tensero, the potential, picon, picon x, uguale picon 0, seno di y su Lx e il motifico di l'acoseno di omega t, punto, non pero più un po', fa parte sempre di quello calculate the transition probability from m equal 1 to n equal 3 at time di grande, at the value, questo è un un di, non è sempre quello, continuo il massimo è la più più più il massimo 0, il massimo è la più più più più più più più più più più più più più più più più più più più più più più più più più più più più sensato per la teoria del del di T T 15'1 3, 15'1 3, 15'1 3, 15'1 15'1 15'1 15'1 invece il punto c, calculate the transition probability for n equal a 1, 2 n equal a 3, at time grande, at the value of omega or at this maximum. Sono veramente contenta che non c'è nessuno che fa foto. La fisica pura per scrivere il testo è dunce qui, cellulare, alzarsi, una pittrizia in male, ma quando in l'altà scrive il testo, perché quando c'è l'unice, in l'altà inizia a pensare cosa deve fare. Prendiamo a peggio stire come una volma. Qualcuno di voi è altra l'altza, la caccia è calda, la caccia è calda. Sono un po' veramente contenta. Il punto d è l'altre e l'altre è 0.2. 0 è il punto punto in anometri e d di 0 è 0.4. Se vado da soluzione. Si cos'è? Si vuole 15'1 3. Quindi sono mega 3. Ma ce la si che davanti? At the value. At the value of omega, R, T, ma quasi male. Si sembra un po' ingrappugliato questo testo, però, ma manca che non lo fa, si si conto il cosa vuole dire. Si, ma fa se non lo sa che. Ah, e c'è un movement. Cosa fa? Non so se vedete che c'è un montoa... ci sono spaventate, dove vanno. Non so se c'è un un ... per chi piangere. C'è un piangere, mi fa fa in foglie. C'è un piangere, mi mi mi mi mi 4 in in in 4 in equadro meno 1 e poi integrale da 0L in dy seno di di di 2YL per Y, il modus y si è macparato di YL per Y, il quale meno 8L diviso 30YL. Poi vedete che integrali più secanti per un modus y. E allora, come dobbiamo disegnare? Non ho detto, lo prima prima ho fatto è com'è di disegnare. Come questo? Parliamo del primo. Semplice un sinusoide internavole. E poi se non l'ha gli estremi giusto? Si, si. E così. Di questo? Tras 0L, poi c'è le metze per la nuova. C'è la nuova. C'è la nuova. C'è l' l' l' l' nuova. E quindi qua c'è il bidon 0 che arriva per il modus y, quindi fa così. E poi invece è finito. Vi concedo? Puoi essere solo positivo? Si, quello capite da start test. Si, non è sicuramente proprio semplice di infanzia, quindi arriva un punto l'acqua, sempre di 0. Sì, è è Com'è il valore? Si, poi lo potete vedere. Ah, sì. C'è uno screm basso. Abbiamo disegnato, allora intanto prima parte lasciamo stare il resto, quindi prendiamo solo il primo punto. Abbiamo questa potenziale qua. Calcolare l'eval energia, vabbè in realtà non c'è l'eval energia, invece ha potuto dire subito per tutta il pesciontiere. Quindi, non dicevo, per solito è per tutta il pesciontiere. E chiaramente che tipo di terria o per tutta il terreno terreno quella che è dipendente al tempo, ma già vediamo subito che invece nella seconda parte del problema avremo invece una potenziale dipendente al tempo. Quindi questa è un esercizio che ha tutte e due le parti. Quindi qual è la nostra aumenta di percorso? Qual è? È da 0 a infinito. Sotto 0 è infinito, sono per... In l'acqua con 0, il b0, il termine cinetico più il b0 dove il b0 è 0 da 2. Il perrelle è infinito, fa size. Quindi di questo sistema, chiaramente, rimosciamo le riso funzioni di quelle che chiamiamo per tutta la tua opzione. Quella è la perturbazione. No, no, non è la perturbazione. Non è la perturbazione, è quella quella hai detto detto Niente apposta. No, no, no, è la perturbazione. Sì, sì, sì. 3 è uguale a 1, 2 è la pela plà, e livelli di energia è con n0. 
+   
+   La nuova cattà è tagliato 4, 2 è con 4, dividi soppure n e le 4 con le 4. Allora, come sapete, questo esercizio è con la buca fra 0 e l'e, quindi sono quelle. A volte potete avere il caso in cui è da menù una mezia, da mezia, da menù una da, da menù l'e, non sono quelle. Ci avete i sani, cosa è? Sì, sì, sono tanti. Perché questo non ci fa caso mette subito questi, che sono quelli che non si ricordano. Più faccio il mette e poi sbaglie. Quindi fate caso, perché intanto si trova l'esercizio con la buca centrata all'origine. Ok, prima domanda. Ah, quindi quindi è quella imperturbata, mentre la perturbazione è quella là. Chiamiamo l'ultimo, no? No, che che ultimimimum, che non ti dico. Quindi in 0, 7, 3, L, X. Allora, correzione, questo è che regga? Il genere, parla di energilerse, non è specifico nello. Si, non non specifico, il genere è come se fosse n. Quindi, tenta è n, apprimordile, non lo dice ma non lo dice e vuole dire questo. È uguale all'elemento di matrice di Diconiz primo, fra le autocputzioni della mico-nale imperturbata n-esime. Questo è uguale all'integrale, come è impritto, diventa poi un integrato del 0L, di X, di primo comitzo, il motore quadro di cn-inverturbata. Questo è uguale all'impritto, quindi, il motore quadro di di Questo è è all'impritto, all'impritto, all'impritto, all'impritto, all'impritto, all'impritto, cn-inverturbata. Il motore quadro di n-t-g-l-x. Per fortuna, abbiamo l'inizio, una inizia ad affare calco, rinvoltorre le tese un piso e ci gliel'inizio, quando trovate un po' po' po' Questa è uguale a 2 di 0L, quindi, qua usiamo i inizi. 2 di 0L, L di grado 4n4, diviso 4n4-1. Quindi, uguale a b0 diviso spigrego 8n4-1. Questa è è è è è risposta alla mia domanda? Sì, dovremmo aggiungere un piso. Magari non sarà un errore considerato tutti, sicuramente. Se chiede le energie, riguardate quella è la correzione. Quindi, poi, ci è un po' di di No, e con n, a più ordine, e con n0, scupto delta e con n0, è il quale... Delta e con n1, se se scusi, è delta e con n1, giusto? Sì, è è scupto. E con n1, e n1, è il il il il questo quello che abbiamo trovato. Abbiamo risposto alla prima domanda? Perché non c'erano valori numerici, per per non andavo bene lasciando così, bisogna lasciarlo con l'espressione. In mezzo, la seconda domanda, nel caso in cui dobbiamo utilizzare le valori numerici, quindi qual è la condizione che il b0 deve soddisfare? Per chi chi al finché la tutt'attiva sia valida, per n equal a 1, prende con l'1. Intanto, parla di pronunzione senza aver ancora i valori numerici, dopodiché li vediamo metteri valori numerici. È un olio che quasi da me lo spazio. Allora, P. Per essere valide, quello che abbiamo detto è che che la la correzione del primo ordine diviso la differenza tra i belli vicini, deve essere molto di noi. Quindi, in taito, è quello che abbiamo attalato. È come un 0, meno, è come un 2, il 0, è uguale a mentre a cadernato 4, P. diviso 2M, 4 che sono quelli per tu, vadi che puoi scelere. E quindi otteniamo la disecuazione 8, 0, 3, P. Ah, prendo quello 1, giusto, perché non lo prendo quello 2? Quale? N, 3, scolpagliato 4, di 3 a 4, diviso 2M, L4, di quale a 6, 0, M, L4, diviso 9, accadagliato 4, di 3 a 3, questo deve essere un 8, minore, quindi abbiamo una condizione su di 0, molto minore, 9, accadagliato 4, di 3 a 4, di 6 a 6, M, L4, diviso 9, 9, 9, in questo caso possiamo esprimere il termine, che lo abbiamo visto nel primo esercizio, il termine è con me. Quindi uguale a quando iniziare molto minore di 9 qui greccottavi nel livello di Gimperturpato, prendendo quello 1, allora siamo in condizione in cui tutti è valda. Seconda parte del ... della prima domanda facciamo una cosa, giusto per capire che il disco che vi piacevo, che che mi sognava, bisogna stare attenti a valori umerici e alle varie convenzioni. Ora chiede, il disveglie before B, 0 uguale al 0,4, 3V, L uguale al 0,2, un anonite. ... ... ... Ma per esempio è venuto stato 1, giusto? Sì, si. ... ... ... ... ... ... ... ... ... di 0 è estrella di qualche valore quindi vuole il valore qua poi dopo controlliamo se il 04 è fettin del mottone di quel no non sostituite questo fate il calcolo la massa dell'elettrone è mezzo mezzo 111 e tempo fì quindi scomai che abbiamo in questo questo in gli esercizzi c'è due casi in generale o trovate mezzo e femmi o trovate elettronvoltenanometri in questo caso che vede elettronvoltenanometri e cerchete di spiurare tutt'in questo video quindi il me fa di 16, è un bordo. Quando invece... ok? Non ha senso passare da questi, ah, il mezzo. Che vuol dire che queste qua sono delle quantità giuste per il sistema. Quindi ad esempio potrei moltivire il dividere per il quadro, perché il valore di H dagli A doci... Ah, provateli. Follò. Fermi di 16. Sì, ci chiedetemi. Però se avete già capito come fare, fatelo, vediamo. Come con fermi. H dagli A doci è 200, dentro molto per maio di giusto. Sì. C dagli A doci è 200, mezzo per fermi. Quindi sì, risultati in mediale. Non è per lui che fa le mezzo per fermi, è spesso stupito. Alte casi però, così la mente, lo potreste trovare, espresso anche come il jet per fermi. Questi sono i casi in genere che vi servono, poi vedete la sphereta o nell'altro. Spero che ci trovi qualcosa di diverso da questo. Sì, è un 100. È un È No? No, un 1.8. No, è enorme, viene. 1.8 mezzo, questo è enorme. No, ti temerò in elettronvolta. Mi ho domanda che dico. Ok, sì, sì. Se qua era il 18.9, fai le cose in elettronvolta in elettronvolta. In questo caso è elettronvolta, che si fa le elettronzioni. Potrebbe essere alto, perché noi speriamo sia valido, noi si troviamo un valore alto rispetto al tuo, quando siamo contenti. Siamo troppo alti, ma non si è rastravo. Sì. Scusa, è poi il... È un sbagliato, un sbagliato, è un bellissimo cazzo. Perché è l'equadro, è grandissima la zeta. Ah, è l'equadro, è un bellissimo cazzo. bellissimo è un bellissimo cazzo. Ora fare questo, questo è un bellissimo cazzo. Se ne avevano fatto poto. Il preto, il preto, il preto, il preto. Il preto è diverso, potrebbe sbagliato il livello, eh? Vediamo... Che è che è l'auto? Ma che notte è un risultato? Anche me vede un numero gigantesco. Ma il gigante è scusi. 225 per più del colpo al attimo. A me 10, 21. 20, 21. Esaceratamente, ragazzi. È un po' di 10 che l'ha detto. Tutti vanno diversi, ovviamente. Sperchiamo che sta fianto il calcolo e che lo facciamo. Ovviamente, è un po' più. Oltre a questo sbagliato è un po' più. Ma che tra di voi non mi avete detto quello di un po' di... 27. Ma c'è un po' di 27. O comunque c'è un po' di 10, iferenzio da mette. Però... Non si è mai risultato. Si, se... Ah, sì, ecco. Sì, ecco, l'ho dimenticato. Ho dimenticato il 96 di Cessini. Il 96 di Cessini. Che 96 di Cessini? Il 96 di Cessini ho fatto il 96. Non ho troppo noi. Ah, perché tu sei piaciuto nel calcoliato? Quando vi sopporto? Questo è l'anno che vuoi. Ok, lo facciamo. Il messaggio è chiaro. Non è un calcoli in meccato. Soprattutto quando vuoi alessare una tensione a poco tempo. Quindi all'enate di tanto, ci sono due. Ma... Con la calcoliata, cioè... Sì, ma deve arrivare. Ah, se stai situandoci direttamente a voi... Si mettono tant'è parentesi. Sì, si sbagliano in due modi. Anzi, forse, è peggio. 
+   
+   E poi, che penso che il presto di me lo possa sentire. I suoi esercizi che erano pure, ma si, iniziano. Sì, sì, un poco. Quello che è il presto di me, è quello che è buono. Ma non potevamo fare una cosa un po' scolretta. Cioè, è praticamente 0, 1. Non sappiamo che il 13,6 è l'altro... No, quello è l'atomo di due ognone. C'è un attimo. Quello è Quello di due ognone. Non lo so, lo so, so. Ok. Però guarda, è bene. Cosa? Allora, facciamo questo... 2,5. No, perché? Perché è vero, per esempio, il 12,5. Qua si semplifia un 2. Però quando viene il 200 metri che erano, la massa del tono è la 0,5 e il meccano. Allora, è un'altra metà. Ah, ecco, dove ho toguito il piatto. Allora, stupido. Quindi, di 0, molto migliore di... Sì, è un piatto. Cosa? Cosa? 2,5. 4,5. Che molti, non? Che greco. Allora, sappiamo che la massa... per sostenire, la massa elettorica, avete detto, essere mezzo mezzo. 0,5. 0,5 mezzo. Però dobbiamo essere, appunto, ciole civare. Quindi, io, subito, capisco che deve moltiplicare il c4. 2,3. M, c4. E questo c4, il numeratore, è proprio quello che mi serve per quello che vi ho detto prima, che ho cancellato, quindi, i valori di HL2C. In unitama di voli, HL2C? Mi ho detto... Lo vi ho preso, eh, per le che a volte, qua, diciamo, non mi serve questa informazione, perché l'auto C è civato. Il c4 è civato, però c'è uno dei casi in cui, magari, mi serve convertire un'età di misura, in quel caso io so che uno, quindi moltiplico per uno, e mi ritrovo la catalia di civare, per la conversione. Quindi, poi, ho il P greco, 4, e poi il fattore. Quale? Allora, qua ho... quindi, capiamo, detto che è in elettronvolto, per una mome, 3 e 2, certo. Ancora, tagliato, c, quindi, diventa 4, per 10 alla 4, elettronvolta al quadrato, per una mome tratturale. Ok? Questo è a cattigliato, c, al quadrato. Y4 e c, per 10? Allora, P greco trovo... C'è un P greco. C'è un P greco, va bene, giusto. Giusto, giusto. No, sì, sì, ok. Qui c'è un P greco, appunto, prendendo la scelva dell'altro fattore. E ho un nome. Poi ho 2, poi ho un mezzo, per 10 alla 6, elettronvolta, dove questo è M civato, e poi ho, F quadro, che sarebbe questo, che sarebbe... 4, per 10 alla meno 2, ma non mesi al quadrato. Quindi, come vende, la cosa come niente non fare è l'orio, esplore tutto in notazione sconvenziale, in notazione scelva, in notazione scientifica con le danze 10. Ok? In modo che poi risulta, se dovrebbe essere tutto facile di spingare, due domandìa. Manco un 8 denominatore. Sì, manco un 8 denominatore. Manco un 8 denominatore. Sì. Perché la nottora è ottaccia. Forse, potrebbe avere 10 differenze. No, non è buono. No. No, il 9 è lasciato. No, il No, il No, Il 8 è il 9, non è la ciò. Quindi poi il 4 è il 4. Ok, guarda molto più senso. Poi abbiamo... C'è rimasto il 14... E si semplifica. Il 16 è il 2, questo e questo, e questa bambia. Cosa è il 14? Il 14 Il il 10, sbagliando, e me lo mi ha detto. Il momento è racconterato. Elettron volt, elettron volt. Mi ricordo, dico, fin che la fisica è una, una, le studenti, lo trovate subito e gli addimitino. Se già qua, vedete che non si è tutta quella corretta. Mi dimentica di qualcosa. C'è rimasto elettron volt, quindi corretto. Questo mi sembra rimastri a Greca, Tensi, Ternone. E sotto l'8, elettron volt, e si trova, lo avevo dimenticato, quindi io... a me l'avevo trattato elettro volte, quindi un po' di meno, e accipienti, se non per me l'avevo trattato, 27, 27, sì, se mettiamo a P. Greca, vuole tra... 27 e 30. È deciso di essere... Molto appressione. Se lo facciamo in realtà, cioè in realtà, in essenzio con questa posizion, per in realtà, cioè ci sarebbe un... 500\% di uno di questi, allora, per un'altre, 35\%, facendo... Cioè, di Greca, Tensi, per un'altre, più 35\% all'inciso. Questo qua anche? Sì. E allora 35\%. È un'altra cosa. È un'altra cosa. È il 735, cioè... No, non è quello che dice come dice la... 
+   
+   come dice la... come dice come la risposta di la grandezza di Versa 6, 10, ma è la vostra, no? Ok. Sono 730. Domanda. Alta domanda, sempre che fa parte della P. Ah, ecco, chiedere, se quella era valida per questi valori, non sovravoremmo quelle uno, ma chiedereva anche per tutti gli altri energy levels. All'intanto, quindi, abbiamo trovato che... che valida... Sì, perché la viaggia 0,4. La viaggia 0,4 è il 8.025. Signora, dobbiamo controllare per gli altri, livelli di energy. Ok. All'occorna facciamo un braveramento. Facciamo... se stiamo sabendo, avevo fatto prima però, il livello è nesimi. Quindi, tenta. E con n, 1, in iso, e con n, 0, meno e con n, più 1, 0, che ho trovati. Questo è quasi uguale. È uguale a il 0 di I. 8, n, 4, 4, n, 4, meno 1, in iso, a cattagliato 4, Y4, in iso, 2, m, e 4. E molto implica, n4, meno, e ne più. Scoggiando questo pezzo, questo pezzo di n, si ottiene il 0, sul PY, 8, n, 4, 4, n, 4, meno 1, in iso, a iso, 4, Y4, 2, m, e 4. Questo è il minore di uno. È il quattro, se forse il quadrato vale ne più 1, per me non è ne più 1, certo. Scusa, scusa. Allora, aspettate, vorremmo fare un malattro di 4. No, veppiamo. Non la vorrei fatta giustizia. Sennò ci sarebbe un n4. Quindi per PY, continuiamo PY, molto meno, a cattagliato 4, si pirega a punto, 32, m, l, che è possibile a 2, m, più 1, 4, meno 1, uno su m quadrato. Basta. Ora, vediamo che questa, in termini n, è una funzione che aumenta con n, perché questo termine aumenta con n, questo termine si annunzia quindi tutto questo momento, e quindi tutta questa è una funzione che aumenta un aumenta che aumenta. E quindi è valido per n, per n1? Sì, quindi è valido per n1 e valido per n1, per n1, per n2. Perché aumenta il termine a destra, quindi P0 sarà a maggior ragione minore di questo termine che manteniamo per un n. Quindi Pt è la duria tutt'oliva, è parida per l'1, n. Allora, tezzo domanda. Quindi passiamo all'interio, per il tubativo di venerdì al tempo, perché il potenziale cambia, il potenziale attima, maggiorizzare il livello a questo in cui la stavia di prima senti più costante che a quattro, e le lezioni di lezioni di lezioni cosa che chiede, è di calcolare la proprietà di condizione da 1 a 3. Però poi specifica questa è la parte che si è ritenuta, al tempo di grande, dove è massima. Quindi in questo punto, quindi la l'ambizia di transizione, la proprietà di transizione, e quindi tutta la proprietà di transizione. Da 1 a 3, al tempo di grande, e dalla da di t, uno tre, il quale uno soffra cata ghiato integrale da tela a tutti i grandi, in metti, e i omega 3, 1, t, e porchittica di primo 3, 1. Dove ovviamente il nostro tipimo di t è così, omega t. Cioè, no, è tutto, la parte che cambia da di tempo è questa qua. Quindi, omega 3, 1, è uguale a omega 3, e meno omega 1 di giusto cata ghiato, in quale a 4 a cata ghiato Y4 Ml4. Era omega 3, 1, e sono di p3, 1. E qua, le vengono di vatici. Si, 0. Che stessa, ma quindi, nel calcolo della omega 3, 1, stiamo usando le energie non perturbate, quindi come sei il Vd, se non ci fosse mai stato. Allora, come sei il... Il primo potenziale, quello che avevamo all'inizio, non ci fosse mai stato. Questo è il è di Tegapix? Si, ma... Si, ma quello che aveva avuto, non era un VdX. Ok, non discorso questo, che noi... questo qua, questo qua, non è soltanto questo termine. Questo è il potenziale di tendente a T. Quindi, a un certo punto, si accende che è questo potenziale complessivamente, e questo potenziale è complessivamente rispetto agli stati del potenziale senza questo potenziale porta eventuali transizioni. Quindi, queste sono quelle diciamo senza questo potenziale interno. Ok, quindi potete portare il dubbio, il fatto che c'era la riavarte prima, il giusto, però deve essere interpetato così questo caso. Quindi, prima era una buca infinita, diciamo normale, e poi c'è quel potenziale di poche. Infatti, effett, tendevo di a T, quello è il è E' ambiglioso. E' ambiglioso, ok, si è effettinterno, non c'è un altro caso, prima può soggere il dubbio. Quindi, prima abbiamo buca di potenziale senza nulla e poi il tempo 0 e quel potenziale. Sì, sì, diciamo che questa recensione sia più da così, però effettinterne come espresso che è un'attività? Scusi, però è stessa. Sì, però non, aspetta, quali le tendenze che li hai giusato, perché appunto lo stavo a scrivere e non ho usato quelli della buca cosa, sì, del sito più da dopo, sì. Sì, anche perché, ok, Giustendia, però è un caso quando avete questa situazione che davvero è più sola, perché il vostro giudice, però a volte avete un cicchi che dicessero questa seconda parte e non è che così calco la correzione. Sì. Sì, è un po' di fermentante. Anche perché questo pezzo ce lo teniamo qui, cioè quando ne facciamo la cosa di prima nell'elemento di vatico, diciamo, mettiamo solo di primo, cioè questo qua mettiamo proprio nella box. 
+   
+   Quindi invece qua, ora in questo calco, questo ci lo portiamo, è tutto. Quindi sarebbe un da quel canting che sarebbe considerassimo sull'elivinergia. È scoposta che è un'altra cosa? No, sì, forse sono un vostro effettante, noi abbiamo usato i livelli di energia di ci senza colpotenziale, giusto? Senza vi... Ci stiamo per usare. Ok. Ok. No, va bene. Allora, di scorso è questo. Chi è questo di primo che metto qui? Questo qua, è quello di pendenza temporale. Che però anche il più opezzo? Sì. Quindi non posso usare elementi senza... Non posso usare quelli... A parte che quelli di prima erano nunca pressivati, ma per questo che perciò dire. Ma anche volendo sapere, sapendo, di per dire in maniera esatta, o anche se volessi usare quelli, ma avrei un po' il canting, se io ottengo qua omega quelli del prima, e per cui comunque metto questi. La domanda interessante potrebbe essere, allora cosa succede se io... cosa succederebbe se io mettesse qui quelli che ho tenuto prima, e qui non metto il termine con X. Ma questo è il fin del sapore con la domanda, così potrebbe portare. Sì, non è per vedere se è questo termine che i stessi risultati che considerano potenziati per mentre l'alt tempo, in cui prima è costante, e poi si accende, se non ti dimentice, la funzione... Per fare questo in cui, per fare questo entro, lo sarebbe utile avere il caso risottamente, non quello, perché se non magari risultati che non vengono bene, semplicemente perché stanno usando una postinazione. Questa è una cosa che è così interessante l'altro andare. Va bene, quindi ora noi... quindi questo di primo è tutto questo. Quindi dobbiamo usare qua quelli senza quel potenziale, ovvero della domanda, della boss. No, si, si, si, si, si, si, si. Non c'è l'altro. Qui abbiamo più da un zero, un seno, un meccatì. C'è in questo caso. C'è in questo caso. C3, zero, seno, si, si greca lx, sicuramente un zero, uguale un zero, un meccatì, in pecorale in tecno, dal drl, è un x di C3, perturbato a più cato, se è di che è con x, su L, psico 1, zero, x. Iguale. A questo punto, psico 1 e psittere che conosco, sono quelli del l'infertyurbati. Quindi sostituisco 2, in zero, L, coseno, meccatì, integrale, cosetero, L, di x, seno, i, c3, yx, su L, seno, i, yx, su L, uguale, ricordo che abbiamo l'ultima che serve a chi qui, 2, di zero, di su L, coseno, meccatì, meno 8L, di riso 30 di greco. In uguale, meno 8 di 0, di riso 15, di greco, per coseno, di omega. Perché ha chiesto la promvina di massa di Roma 3 e Roma 2? La poter dire che la poter dire. Non è che erano mie siti perché devono parlare insieme. Per qualità? Fa zero? Fa zero. Perché questo caso avreste avuto questo 2, e quindi avremmo avuto quel servizio per i prefezzi. Per il pegrale, per i prefezzi. Un capitale, un circunso che peria il 2, e la si deve non capire che potete fare il calato. Prima di fare tutti questi, se non se che erano qui, e dico ok, poi il 2. Questo sarebbe dispari. La col quadrato col potenziale cotta in gopargo, il 0, e uno scrive una facetta. Che si chiama perché non c'è più un calato, il minus questo è il 30 e il 30. Ora dobbiamo inserire, ma per trovare qua dentro. Il calato, l'ho fatto di fatto P a tagliato 8 di 0,15 y integrale dal 0 a t in metto, e quindi il quale ma il tagliato è 4 di 0,15 y integrale dal 0 a t in metto, usando il coseno di un esponenziali è i omega 3 1 più omega t più e i omega 3 1 meno omega t, e quindi il quale ma il tagliato è il quale ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il ma il tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato è tagliato quale ma il tagliato è il quale ma il ma è il quale ma il tagliato il il quale ma il tagliato è il è il noi abbiamo una situazione sinusoidale, poteniamo una cosa di genere, in solito avete fatto una letteria. E come si chiamo questi termini? Assorbimento ed evisione stimolato. E in solito questo fatto di lezione quando uno domina è un modo trascurabile. Quindi quando vogliamo guardare l'unificazione in cui la con età è massima sarà solo uno da considerare. Che tipo di ragionamento bisogna fare? Qual è quella delle emissioni del nostro bilancio? E ora veniamo qua.
+   
+   Questo è quello che si è stimolato e questo è l'assorbimento. Se uno si non lo ricorda a memoria più o meno lo capisce weirdi. e invece la deve essere in sua cataglia d'uno, cioè come scombare l'ai. Allora io ho io ho E quindi omegate uno sarebbe finale e iniziale più a catagliato omere. In questo caso specifico finale 3 è questo 1. Quindi noi stiamo dicendo che... Meno anche da io ho un po' di problema. Infatti perché se non sarebbe la... Sì certo, in mezzo di me lo me lo sarebbe la visione stimolata come ho detto prima. Quindi significa che il sistema che si sta facendo passa da uno più alto a uno più basso. Sì, appunto, ma se ne energie più bassa... È la Xera da un attrattato 3 a 1. Da un attrattato 3 a 1. a un attrattato 3 a 1. Ok. Allora quindi il nostro omegate uno, quindi questo è finale e questo è iniziale. E quindi finale e finale, giusto così. Sì. Perché il livello 1, o forse lo sto pensando male io, è più alto o più basso in energie del livello 3? Cioè questo è il mio dubbio sul segno. Il livello 1 è... Vabbè il livello 6 è dato dai 1 ma è amato dagli atomi. E' basso. Ma togli sempre qualcosa. E il 6 è basso. Il 6 è il lune più basso. Una barraccia che non si è suginata. Ok, e con n è imposto. Quindi le stiamo parlando che con f qui, come in questo caso specifico, e con n abbiamo detto, poi con f, che modo? Sì, c'è il più basso. C'è il più basso. E questo è iniziale. Il suore d è 1. E questo è la situazione che si fa. Non vi scusi, ma per... Cioè le energie sono quelle che abbiamo trovato all'inizio, giusto? Quelle della buca? Sì. Quelle non... Cioè forse so, è come un livello. Non scalano con n4. Non sarò la stranchezza delle quarte dei 5. Ma non sono... Ma questo è la stimulated emission. Eh, senza dire emission. E questo è la stimulated emission. Ok, allora... Eh, non se non sbagliate, abbiamo scritto n quadro al numeratore, ma non sta denominatore nella puta... Non ha scompato che abbiamo scelto un inter... No. No. No. Sì. No. No. No. No. No. No. No. No. No. No, no. No. No. Eh... Ma era per considerare le cose, ma è di quel dato. Non mi iniziare. No. È da sé il numeratore è di 3 più alto. Cioè, no. La rosa è chiamata, che questo qua significa questo, no? Cioè, che sta togliendo... 6 iniziale, meno questa questa è minore, e con F è minore di 1, di questo è più chiaro. Questo è proprio vero. Vediamo che questo è scritto io, veramente l'altro vale che è caso opposto, cioè... Eh, ma noi non siamo... cioè il nostro sistema non ha con F minore di E con F. Questo è il condoroso. No, no, No, questo è il condoroso di tutti e due cosa... cioè qualunque... Ok. ...un sistema e l'attosciente. Sì. Eh, infatti. Quindi ignoreremo il sposto. In questo dico non... se ne metto un e tre va a confondere perché non è il sistema che stiamo guardando. Infatti, per questo questo ha fatto un confondere, per lo metto uno tre. Ok. Allora, perché tutti i tempi sono avanzati in certo modo? Allora, quindi in generale, lascio stare un po' da che cosa faccio ora, in generale, vado uno finale minziale. Cioè questo... ...è uno finale minziale, questo termine domina quando questo è uguale a zero, che più vale dire che con F è uguale a E con E meno una certa energia. Ovvero che E con F è il minore di E con E, che vi siamo in questo caso. Di questo è in generale, stiamo guardando in generale. Allora, ma lo quattente, il termine di assorbimento domina quando è E con E meno o me che è C, quando è a zero, che alla fine significa avere una situazione di questo C. Sì. Quindi, E con E con F con E con E minore di E con F. Ok. Ora uno mette tre e uno, perché ora uno guarda il sistema che noi avevamo. Dato che qua siamo da uno a tre, ovviamente deve stare questo qua. Quindi quello non può avere quel caso, quindi possiamo avere solo questo caso qua. Ok. Ecco, quindi diciamo il discorso, quello è il discorso generale, che vi serve in generale. Però per il caso specifico sappiamo che il mio è che può avvenire questo. Ma comunque quel discorso generale, cioè in generale quando uno domina l'altro è E, l'altro è Tascurabile, quando domina l'altro è Tascurabile. In questo caso questo non c'è proprio. Abbiamo questo. Poi in più, siccome ci chiede, quando è massima, volete che stiamo parlando sempre della situazione in cui questo è circa zero. Questo si ora è clavo. Sì, questo si. Il mio è che vuole metterlo. Ma quindi per il stesso tempo mi scusi, visto che noi sappiamo qual è la transizione che stiamo considerando, lo possiamo dire a priori? Sì. Dire a priori cosa? Qual è il termine da considerare? Sì, sì, per la non sì. Se ti ti fai qual è il subimento e qual è la missione, la fate del giunimento per il vero. Sì, questo sì, certo. Però di comuni, un intanto arriva a questo, poi dice, come stiamo considerando la transizione, o tre allora questo deve essere, che dobbiamo considerare. Ok, quindi a questo momento ora definisco di omega per una potaccia, a presto, cioè, ed è uno meno omega. 
+   
+   E quindi il mio, la mia probabilità da un da un a tre è uguale a meno quattro, di con zero, indici, di greco, a un gran grado è meno i del t omega, i meno uno. Nel t omega, quindi appunto lo posso dire a priori, senza che l'altro termine lo dovrebbe fare, non l'è. Ora qua, utilizzo un passaggio che parliamo prima, che però magari li faccio con l'alpha, perché magari non sono cari, li faccio con le cionette. Cioè, proprio un termine, una cosa dell'ordine è l'alpha, che è l'alpha, è meno uno. Questo poi diventa un seno di alfametti. È chiaro che tutti lo lo faccio. Ecco quello che mi ha fatto io. È chiaro. No, prima l'avevo fatto l'altro mezzo. E ne stai facendo che l'avevo messo? No, l'avevo No, l'avevo mezzo. Ok, quindi è chiaro. Sì, sì. Nessuno ha un alzano malo che lo dovrei fare. No, è chiaro, è chiaro. Ok, non so quanto queste cose siamo fate incontrate. Ecco, questo qua diventa. E, per quanto è indietro, l'altro, di con zero, ti riguarda è meno di te di omega di 2 di provincesi ha un critico. Un po' di 90. di eh... viene dal posto che ha definito, il quaterno ha definito così infatti qua è semplice, perché altrimenti non sarebbe anche un mere si si è un prezzo di ragione, dove qua era una definizione, dove si poteva definire e che a contrario allora scompare costumena e scompare costumena scelete voi come correggiano costumena, grazie perché è un quaterno grazie a lei e quindi quella per cui la definizione è p1 che è il quadrato di quella per, non faccio neanche il fastaggio, per le sveomega 540 per una del massima, abbiamo che senα a 540 e quindi da quel termino otteniamo 1 e quindi questa risulta 16, con 0 al quadrato di quadro, a cadere al quadrato di quadro quindi quadro quadrato di quadro quindi questa è, dato che abbiamo imposto questa cosa qua e quando è il massima come riede il problema? per si per caratteristica ok, ci siamo avremmo il tempo in un senpato però nel caso in due massima, se è un senato in un ciclo colato di tutto il rapporto fa la cosa ora la tua domanda la tua domanda di, ci chiede di fare i calcoletti che abbiamo fatto prima quindi per certi valori di L, di L di 0 chiede se è l'antank, di depende per le pescioltieri è l'antesa di essere valida per un valore particolare del tempo trascorso di 1 quindi 1 di rischio a capgranti 0.2 nanometri di 1,0 uguale 0.4 elettrovolto e di uguale 15 di grado ovega 3 e allora la tua vita in uguale a 16 di 0.4 potrebbe valare se non sauta niente, mentre scrivo sostituisco i valori inti quali, despesso inti quali 11 di grado ovega 3,1 al quadrato qua, voi vederli, scusi più già prima, che spesso sono il quadrato anche qua che spesso poi i valori che abbiamo dato sono tali a semplificarsi di 1,0 al quadrato e il più che va a dirzevici 16 di 0.4 di 4 e il mequadro è l'allaquatta diviso a cadagliato quadro 16 a cadagliato quadro di grecaquatta ci ho sostituito ovega 3,1 questo punto staglia il 16 e ho un h4 qua e un mk4 qua un h4 qua e un mk4 qua, quindi molti di li posizionano un valore che è l'aggiunta di minatore per c'è l'allaquatta il mequadro di 1,0 al quadro mc4 sta colato l'allaquatta diviso a cadagliato c allaquatta di grecaquatta questo è quello che ho fatto a casa ho fatto le sostituzioni di prima in questo caso dove abbiamo le nanometri electron volt lasciamo questi qua e risulta, la facciamo insieme non ci vedete, perché quando l'A del mk4 lo faccio quindi questo è il vizio del 0,4 ovvero diventa 16 per 10 al al 2 e retto a quadrato poi abbiamo mc4 che particella era per l'altro rettone, sempre rettone non è cambiato quindi abbiamo come al quadrato abbiamo un 4 10 alla 12 retto a quadrato e poi abbiamo l quindi è 2 alla 4 per 10 alla 4 a 9 di alla 4 e sottobbiamo cadagliato c quindi 2 alla 4 per 10 alla 8 electron volt al quadrato a 9 di alla 4 e di alla 4 quindi ricorda che questo è il modo migliore di esprimere quindi un'otazione di moto potrebbe semplificare più facilmente e quindi qua abbiamo a piavo a piavo alla 4 che lo abbiamo uscito alla carta che abbiamo questo e questo si semplifino e poi abbiamo totalmente i vari 10 intanto in realtà di misura, controlliamone nel piquadro che abbiamo nel piquadro questo è questo pappio e mi ricordo che non ha proprio abilitato quindi giusto che non abbiamo visto di misura e poi abbiamo i vari 10 deveare condensare 10 e quindi partiamo 4 di greca 4 per 10 alla meno 2 questo è il mio scasino ok quindi questo è il tuo quale a 4 per 10 alla 9 di alla 4 perché ti vuole 3 10 di questo 10 al quadrato e questo è chiaramente un modo migliori 2 quindi tutti i vari sono migliori ok ok per questo esercizio abbiamo domande tuttoliamo eh in realtà abbiamo continuo di non aver fatto la pausa quindi io direi di intervare per qui non avrebbe pensato iniziale e poi perciò e niente la prossima volta quindi
+
+   \begin{equation*}
+      H_0=K + V_0
+      \qq{dove}
+      V_0=
+      \begin{cases}
+         0 & \text{per } 0<x<L\\
+         +\infty & \text{altrimenti}\\
+      \end{cases}
+   \end{equation*}
+   \begin{equation*}
+      \psi_n^{(0)}(x)
+      =\sqrt{\frac{2}{L}} \sin{\qty( \frac{n \pi x}{L} )}
+      \qq{,}
+      n=1,2,\ldots
+   \end{equation*}
+   \begin{equation*}
+      E_n^{(0)}
+      =\frac{\hbar^2 \pi^2 n^2}{2mL^2}
+      \qq{,}
+      n=1,2,\ldots
+   \end{equation*}
+   \begin{equation*}
+      V'=V_0\sin\qty( \frac{\pi}{L} x)
+   \end{equation*}
+   \begin{equation*}
+      \delta E_n^{(1)}
+      =\mel*{\psi_n^{(0)}}{V'}{\psi_n^{(0)}}
+      =\int_{0}^{L} \dd{x} V'(x) |\psi_n^{(0)}(x)|^2
+      =\frac{2V_0}{L} \int_{0}^{L} \dd{x} \sin{\qty( \frac{\pi}{L} x )} \sin^2{\qty( \frac{n\pi}{L} x )}
+   \end{equation*}
+   \begin{equation*}
+      \delta E_n^{(1)}
+      =\frac{2V_0}{L} \frac{L}{\pi} \frac{4n^2}{4n^2 - 1}
+      =\frac{V_0}{\pi} \frac{8n^2}{4n^2 - 1}
+   \end{equation*}
+   \begin{equation*}
+      E_n^{(1)}
+      =E_n^{(0)} + \delta E_n^{(1)}
+      =\textbf{scrivilo tu}
+   \end{equation*}
+
+   \begin{equation*}
+      \biggl| \frac{\delta E_n^{(1)}}{ E_1^{(0)} - E_2^{(0)} } \biggr| \ll 1
+   \end{equation*}
+
+   \begin{equation*}
+      \qty| \frac{ \frac{8V_0}{3\pi} }{ -\frac{3 \hbar^2 \pi^2}{2 m L^2} } |
+      =\frac{16 V_0 m L^2}{9 \hbar^2 \pi^3}
+      \ll 1
+   \end{equation*}
+
+   \begin{equation*}
+      E_1^{(0)} - E_2^{(0)}
+      =-3 \frac{\hbar^2 \pi^2}{2 m L^2}
+   \end{equation*}
+
+   \begin{equation*}
+      V_0 \ll \frac{9 \hbar^2 \pi^3}{16 V_0 m L^2}
+   \end{equation*}
+   }
+\end{soluzione}
