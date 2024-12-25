@@ -11,7 +11,7 @@
    \end{equation*}
    \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
       \item Use perturbation theory to calculate the energy of the ground state $E_1^{(1)}$.
-      \item For $m=1 \; \rm GeV$ and $L=2 \; \rm fm$ what is the value of $V_0$ to have $V_0=2E_1^{(1)}$?
+      \item For $m=1 \; \rm GeV$ and $L=2 \; \rm fm$ what is the value of $V_0$ to have $V_0=0.2E_1^{(1)}$?
       \item Under the condition in b), ($V_0 \ll E$), calculate the ground state energy with the WKB approximation.
       \item How the result in c) compares to the result in a)? (Explain)
    \end{enumerate}
@@ -137,7 +137,7 @@
 
    \begin{equation*}
       V_0
-      =\frac{(\hbar c^2) \pi^2}{9 (mc^2) L^2}
+      =\frac{(\hbar c)^2 \pi^2}{9 (mc^2) L^2}
       =\rm \frac{4 \cdot 10^{-2} \; GeV^2\,fm^2 \cdot 10}{9 \cdot 1 \; GeV \cdot 4 \; fm^2}
       =\frac{1}{90} \; GeV
       \approx 11 \; MeV
@@ -157,7 +157,7 @@
    
    \begin{gather*}
       \int_{0}^{L} p(x) \dd{x}
-      \int_{0}^{L} \sqrt{2m \bigl[ E - V(x) \bigr]} \dd{x}
+      =\int_{0}^{L} \sqrt{2m \bigl[ E - V(x) \bigr]} \dd{x}
       =\int_{0}^{L/2} \sqrt{2mE} \dd{x} + \int_{L/2}^{L} \sqrt{2m(E - V_0)} \dd{x}
       =\\
       =\sqrt{2mE} \frac{L}{2} + \sqrt{2m(E - V_0)} \frac{L}{2}
@@ -200,7 +200,7 @@
       E=E_n^{(0)} + \frac{V_0}{2} + \frac{V_0^2}{16 E_n^{(0)}}
    \end{equation*}
 
-   Notiamo che tale espressione è data dal risultato ottenuto con la teoria perturbativa più un termine aggiuntivo $\frac{V_0^2}{16 E_n^{(0)}}$. Se però adesso questo punto sfruttiamo la condizione $V_0 \ll E$ fornita dal testo, tale energia si riduce semplicemente a
+   Notiamo che tale espressione è data dal risultato ottenuto con la teoria perturbativa più un termine aggiuntivo $\frac{V_0^2}{16 E_n^{(0)}}$. Se però ora sfruttiamo la condizione $V_0 \ll E$ fornita dal testo, tale energia si riduce semplicemente a
 
    \begin{equation*}
       E_n^{(0)} + \frac{V_0}{2}
@@ -214,7 +214,13 @@
       E=E_1^{(0)} + \frac{V_0}{2} \qty( 1 + \frac{V_0}{8 E_1^{(0)}} )
    \end{equation*}
 
-   Utilizzando i valori $V_0=1.1 \cdot 10^{-2} \; \rm GeV$, $E_1^{(0)}=5V_0=5 \cdot 10^{-2} \; \rm GeV$, si trova che $\frac{V_0}{8 E_1^{(0)}} \approx 0.03 \ll 1$. Possiamo allora effettivamente dire che, per i valori trovati nel punto b), siamo nel caso in cui tale termine risulta trascurabile e pertanto il risultato della WKB coincide con quello della teoria perturbativa.
+   Utilizzando i valori $V_0=1.1 \cdot 10^{-2} \; \rm GeV$, $E_1^{(0)}=5V_0=5 \cdot 10^{-2} \; \rm GeV$, si trova che
+   
+   \begin{equation*}
+      \frac{V_0}{8 E_1^{(0)}} \approx 0.03 \ll 1
+   \end{equation*}
+   
+   Possiamo allora effettivamente dire che, per i valori trovati nel punto b), siamo nel caso in cui tale termine risulta trascurabile e pertanto il risultato della WKB coincide con quello della teoria perturbativa.
 \end{soluzione}
 
 \newpage
@@ -327,8 +333,8 @@
 
    \begin{equation*}
       E_1^{(1)}
-      E_1^{(0)} + \delta E_1^{(1)}
-      =\frac{\pi \hbar^2}{m L^2} + V_0\qty( \frac{1}{4} - \frac{1}{\pi^2} )
+      =E_1^{(0)} + \delta E_1^{(1)}
+      =\frac{\hbar^2 \pi^2}{2 m L^2} + V_0\qty( \frac{1}{4} - \frac{1}{\pi^2} )
    \end{equation*}
 
    Passiamo al punto b). Ricordiamo che la condizione affinché la teoria perturbativa sia valida è che il rapporto tra la correzione di energia e la differenza di energia tra lo stato imperturbato e quello più vicino deve essere molto minore di 1; in particolare per il ground state si deve avere
