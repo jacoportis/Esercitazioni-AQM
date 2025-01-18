@@ -95,8 +95,8 @@ La WKB è utile per trovare i livelli di energia approssimati. Vediamo allora co
          \filldraw[gray!20!] (-2,0) node[black,below] {$x_1$} -- (-2,2.5) -- (-4,2.5) -- (-4,0) -- cycle;
          \filldraw[gray!20!] (2,0) node[black,below] {$x_2$} -- (2,2.5) -- (4,2.5) -- (4,0) -- cycle;
          \draw[->] (-4,0) -- (4,0) node[right] {$x$};
-         \draw[blue!60!black] (-2,1.5) .. controls (-0.5,2) and (0.5,0.3) .. (2,1.5);
-         \draw[red] (-2,1.9) -- (2,1.9) node[right] {$E$};
+         \draw[thick,blue!60!black] (-2,1.5) .. controls (-0.5,2) and (0.5,0.3) .. (2,1.5);
+         \draw[thick,red] (-2,1.9) -- (2,1.9) node[right] {$E$};
       \end{tikzpicture}
    \end{figure}
 
@@ -123,7 +123,7 @@ La WKB è utile per trovare i livelli di energia approssimati. Vediamo allora co
       \centering
       \begin{tikzpicture}
          \filldraw[gray!20!] (-2,0) node[black,below] {$x_1$} -- (-2,3.3) -- (-4,3.3) -- (-4,0) -- cycle;
-         \filldraw[dashed] (2,0) node[black,below] {$x_2$} -- (2,1.9);
+         \draw[dashed] (2,0) node[black,below] {$x_2$} -- (2,1.9);
          \draw[->] (-4,0) -- (4,0) node[right] {$x$};
          \draw[red,thick] (-2,1.9) -- (4,1.9) node[right] {$E$};
          \draw[thick,blue!60!black] (-2,1.5) .. controls (-0.5,2) and (0.5,0.3) .. (2,1.9) .. controls (2.5,2.4) and (3,3) .. (4,3.1);
@@ -191,5 +191,7 @@ dove $x_1$ e $x_2$ sono i classical turning points.
    f^{\rm Born}(\vartheta)
    =-\frac{2m}{\hbar^2} \int_{0}^{\infty} \dd{r} r V(r) \frac{\sin{(qr)}}{q}
 \end{equation*}
+
+\subsubsection*{Partial wave expansion}
 
 }
