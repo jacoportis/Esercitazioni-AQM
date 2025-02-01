@@ -1,0 +1,30 @@
+\begin{esercizio}
+   Consider the scattering of a proton over a hard sphere potential:
+   \begin{equation*}
+      V(r) =
+      \begin{cases}
+         +\infty & \text{for } r < R \\
+         0 & \text{elsewhere}
+      \end{cases}
+   \end{equation*}
+   where $R = 5$ fm.
+   \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
+      \item Find the general formula for the phase shift $\delta_{\ell}$ in terms of the Bessel and Neumann functions and the exact formula for the total cross-section for $\ell=0$.
+      \item Using the low-energy limit, find the energy value in MeV at which the cross-section $\sigma_{\ell=1}=\frac{1}{9} \sigma_{\ell=0}$.
+      \item Given $ kR=\frac{5\pi}{3}$, calculate in the high-energy limit the cross-sections $\sigma_{\ell=9}$ and $\sigma_{\ell=1}$ in mb.
+   \end{enumerate}
+   Hint:
+   \begin{gather*}
+      j_{\ell}(\rho \to 0)
+      \simeq \frac{\rho^{\ell}}{(2\ell + 1)!!}
+      \qq{,}
+      \eta_{\ell}(\rho \to 0)
+      \simeq -\frac{(2\ell - 1)!!}{\rho^{\ell+1}}
+      \\
+      j_{\ell}(\rho \to \infty)
+      \simeq \frac{\sin{ \qty( \rho - \ell \frac{\pi}{2} ) }}{\rho}
+      \qq{,}
+      \eta_{\ell}(\rho \to \infty)
+      \simeq -\frac{\cos{ \qty( \rho - \ell \frac{\pi}{2} ) }}{\rho}
+   \end{gather*}
+\end{esercizio}

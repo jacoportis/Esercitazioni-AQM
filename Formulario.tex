@@ -184,14 +184,33 @@ Per parlare di penetrabilità ci dobbiamo trovare nel caso $E<V$. Si ottiene che
 \end{equation*}
 dove $x_1$ e $x_2$ sono i classical turning points.
 
-\comment{
 \subsection*{Scattering Theory}
-
+Nella teoria dello scattering studiamo sistemi in cui c'è una regione dello spazio con un certo potenziale $V$ avente un certo range $R_V$ e abbiamo un'onda piana incidente. Il risultato dell'interazione tra questa e il potenziale è un'onda piana uscente più un'onda sferica:
+\begin{equation*}
+   \psi(x)=\varphi_k(x) - \frac{2m}{\hbar^2} \frac{e^{i k r}}{r} f(\vb{k}, \vb{k'})
+\end{equation*}
+L'obiettivo della teoria dello scattering è determinare l'ampiezza di scattering $f(\vb{k}, \vb{k'})$, da cui possiamo ottenere la sezione d'urto differenziale, definita come
+\begin{equation*}
+   \dv{\sigma}{\Omega}
+   =| f(\vb{k}, \vb{k'}) |^2
+\end{equation*}
+e da cui a sua volta si può ottenere la sezione d'urto totale integrando su tutto l'angolo solido.
+\subsubsection*{Approssimazione di Born}
+Un primo metodo per risolvere il problema dello scattering è quello dell'approssimazione di Born al primo ordine. Con tale metodo si trova che la sezione d'urto di Born è
+\begin{equation*}
+   f^{\rm Born}(\vb{k}, \vb{k'})
+   =-\frac{1}{4 \pi} \frac{2 m}{\hbar^2} \int \dd[3]{x} e^{i (\vb{k} - \vb{k}') \vdot \vb{x}} V(\vb{x})
+\end{equation*}
+Spesso si preferisce esprimere tale quantità in termini del momento trasferito $\vb{q}=\vb{k} - \vb{k'}$:\footnote{Attenzione! In alcuni testi si potrebbe trovare la formula con un segno meno nell'esponenziale. Ciò è dovuto al fatto che in essi il momento trasferito è stato definito come $q=k'-k$.}
+\begin{equation*}
+   f^{\rm Born}(\vb{k}, \vb{k'})
+   =-\frac{m}{2 \pi \hbar^3} \int \dd[3]{x} e^{i \vb{q} \vdot \vb{x}} V(\vb{x})
+\end{equation*}
+e tale espressione risulta essere la trasformata di Fourier del potenziale $V(\vb{x})$.\\
+Nel caso di potenziali centrali, in cui $V(\vb{x}) \equiv V(r)$, la sezione d'urto differenziale si può esprimere come
 \begin{equation*}
    f^{\rm Born}(\vartheta)
    =-\frac{2m}{\hbar^2} \int_{0}^{\infty} \dd{r} r V(r) \frac{\sin{(qr)}}{q}
 \end{equation*}
-
-\subsubsection*{Partial wave expansion}
-
-}
+Inoltre si può dimostrare che il modulo del momento trasferito è $q=2k \sin(\vartheta/2)$, dove $\vartheta$ è l'angolo di scattering tra $\vb{k}$ e $\vb{k'}$.
+%\subsubsection*{Partial wave expansion}

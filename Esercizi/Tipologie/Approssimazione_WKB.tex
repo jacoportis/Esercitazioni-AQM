@@ -1,0 +1,112 @@
+\begin{esercizio}
+   An electron is initially in the ground state of a one-dimensional infinite-well potential of length $2L$, centered at $x = 0$. At time $t = 0$, the system is perturbed by the potential:
+   \begin{equation*}
+      V(x) =
+      \begin{cases}
+         \alpha |x| & \text{if } |x| < L\\
+         0 & \text{if } |x| > L
+      \end{cases}
+   \end{equation*}
+   with $\alpha > 0$, for a time $T$.
+   \begin{enumerate}[label=\alph*), leftmargin=0.6cm]
+      \item Compute the transition probability to the second excited state at time $t>T$ using first-order perturbation theory. Evaluate this probability at the $T$ that maximizes it, assuming $L=1$ nm and $a=0.25$ eV/nm.
+      \item Is the probability of transition to the first excited state larger or smaller than the one computed in a)? Justify your answer.
+      \item Use the WKB approximation to determine the energy levels below $E=\alpha L$ for $0<t<T$. How many such levels exist for the given values of $L$ and $\alpha$ as in a)?
+   \end{enumerate}
+   Hint:
+   \begin{equation*}
+      \int_{0}^{L} \dd{x} \cos{ \qty( \frac{3 \pi x}{2 L} ) } \cos{ \qty( \frac{\pi x}{2 L} ) } x
+      =-\frac{L^2}{\pi^2}
+   \end{equation*}
+\end{esercizio}
+\begin{soluzione}
+   Svolgiamo il punto a). Dobbiamo trovare la probabilità di transizione dal ground state al secondo stato eccitato. Per fare ciò ci serve l'ampiezza di transizione $c_{i \to f}$, che in questo caso è data da
+   \begin{equation*}
+      c_{1 \to 3}
+      =-\frac{i}{\hbar} \int_{0}^{T} \dd{t} V_{3,1}(t) e^{i \omega_{3,1} t}
+   \end{equation*}
+   Calcoliamo innanzitutto $V_{3,1}(t)$. Esso è dato da
+   \begin{equation*}
+      V_{3,1}(t)
+      =\mel{\phi_3}{V}{\phi_1}
+      =\mel{\phi_3}{\alpha |x|}{\phi_1}
+      =\alpha \int_{-\infty}^{\infty} \dd{x} \psi_3^*(x) \psi_1(x) |x|
+      =\alpha \int_{-L}^{L} \dd{x} \psi_3^*(x) \psi_1(x) |x|
+   \end{equation*}
+   in quanto le funzioni d'onda sono nulle al di fuori dell'intervallo $[-L,L]$.\\
+   In questo caso, visto che la buca si estende da $-L$ ad $L$, le funzioni d'onda sono date da
+   \begin{equation*}
+      \psi_n(x)
+      =
+      \begin{cases}
+         \displaystyle \sqrt{\frac{1}{L}}\cos{ \qty( \frac{n \pi x}{2L} ) } & \text{per $n$ dispari}\\[0.3cm]
+         \displaystyle \sqrt{\frac{1}{L}}\sin{ \qty( \frac{n \pi x}{2L} ) } & \text{per $n$ pari}
+      \end{cases}
+   \end{equation*}
+   Sostituendo allora le funzioni d'onda, otteniamo
+   \begin{equation*}
+      V_{3,1}(t)
+      =\frac{\alpha}{L} \int_{-L}^{L} \dd{x} \cos{ \qty( \frac{3 \pi x}{2L} ) } \cos{ \qty( \frac{\pi x}{2L} ) } |x|
+   \end{equation*}
+   Se adesso sfruttiamo il fatto che per per una funzione pari $f(x)$ vale
+   \begin{equation*}
+      \int_{-a}^{a} \dd{x} f(x)
+      =2 \int_{0}^{a} \dd{x} f(x)
+   \end{equation*}
+   Possiamo scrivere
+   \begin{equation*}
+      V_{3,1}(t)
+      =\frac{2\alpha}{L} \int_{0}^{L} \dd{x} \cos{ \qty( \frac{3 \pi x}{2L} ) } \cos{ \qty( \frac{\pi x}{2L} ) } x
+      =\frac{2\alpha}{L} \qty( -\frac{L^2}{\pi^2} )
+      =-\frac{2\alpha L}{\pi^2}
+   \end{equation*}
+   avendo usato usato il suggerimento fornito dal testo.\\
+   Calcoliamo adesso $\omega_{3,1}$. Ricordiamo che per la buca quadra le energie sono date da
+   \begin{equation*}
+      E_n
+      =\frac{\hbar^2 \pi^2}{8 m L^2} n^2
+      \qq{,}
+      n=1,2,\ldots
+   \end{equation*}
+   Quindi
+   \begin{equation*}
+      \omega_{3,1}
+      =\frac{E_3-E_1}{\hbar}
+      =\frac{8 \hbar^2 \pi^2}{8 m L^2}
+      =\frac{\hbar^2 \pi^2}{m L^2}
+   \end{equation*}
+   A questo punto possiamo calcolare l'ampiezza di transizione, che sarà data da
+   \begin{equation*}
+      \begin{split}
+         c_{1 \to 3}
+         & =-\frac{i}{\hbar} \int_{0}^{T} \dd{t} V_{3,1}(t) e^{i \omega_{3,1} t}
+         =\frac{2 i \alpha L}{\hbar \pi^2} \int_{0}^{T} \dd{t} e^{i \omega_{3,1} t}
+         \\[0.2cm]
+         & =\frac{2 i \alpha L}{\hbar \pi^2} \frac{1}{i \omega_{3,1}} \qty[ e^{i \omega_{3,1} t} ]_{0}^{T}
+         =\frac{2 \alpha L}{\hbar \pi^2} \frac{1}{\omega_{3,1}} \qty( e^{i \omega_{3,1} T} - 1 )
+      \end{split}
+   \end{equation*}
+   Sostituendo le espressioni trovata per $\omega_{3,1}$ e osservando che
+   \begin{equation*}
+      e^{i\alpha} - 1
+      =2i e^{i \frac{\alpha}{2}} \frac{\qty( e^{i \frac{\alpha}{2}} - e^{-i \frac{\alpha}{2}} )}{2i}
+      =2i \sin{ \qty( \frac{\alpha}{2} )} e^{i \frac{\alpha}{2}}
+   \end{equation*}
+   otteniamo (nel nostro caso $\alpha=\omega_{3,1}T$)
+   \begin{equation*}
+      c_{1 \to 3}
+      =\frac{4 i \alpha m L^3}{\hbar^2 \pi^4} \sin{ \qty( \frac{\omega_{3,1} T}{2} )} e^{i \frac{\omega_{3,1} T}{2}}
+   \end{equation*}
+   e dunque la probabilità di transizione sarà data da
+   \begin{equation*}
+      P_{1 \to 3}
+      =|c_{1 \to 3}|^2
+      =\frac{16 \alpha^2 m^2 L^6}{\hbar^4 \pi^8} \sin^2{ \qty( \frac{\omega_{3,1} T}{2} )}
+   \end{equation*}
+   In particolare, la probabilità di transizione sarà massima quando la funzione seno assume il suo valore massimo, cioè 1. In corrispondenza di tale valore si avrà
+   \begin{equation*}
+      P_{1 \to 3}^{\rm max}
+      =\frac{16 \alpha^2 {(mc^2)}^2 L^2}{(\hbar c)^4 \pi^8}
+      =\rm \frac{16 \cdot 0.25^2 \; eV^2 \, nm^{-2} \cdot 0.5^2 \cdot 10^{12} \; eV \cdot 1 \; nm^6}{2^4 \cdot 10^8 \; eV^4 \, nm^4 \cdot \pi^8}
+   \end{equation*}
+\end{soluzione}
