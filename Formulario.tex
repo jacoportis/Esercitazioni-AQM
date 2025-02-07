@@ -199,18 +199,44 @@ e da cui a sua volta si può ottenere la sezione d'urto totale integrando su tut
 Un primo metodo per risolvere il problema dello scattering è quello dell'approssimazione di Born al primo ordine. Con tale metodo si trova che la sezione d'urto di Born è
 \begin{equation*}
    f^{\rm Born}(\vb{k}, \vb{k'})
-   =-\frac{1}{4 \pi} \frac{2 m}{\hbar^2} \int \dd[3]{x} e^{i (\vb{k} - \vb{k}') \vdot \vb{x}} V(\vb{x})
+   =-\frac{1}{4 \pi} \frac{2 m}{\hbar^2} \int \dd[3]{\vb{x}} e^{i (\vb{k} - \vb{k}') \vdot \vb{x}} V(\vb{x})
 \end{equation*}
 Spesso si preferisce esprimere tale quantità in termini del momento trasferito $\vb{q}=\vb{k} - \vb{k'}$:\footnote{Attenzione! In alcuni testi si potrebbe trovare la formula con un segno meno nell'esponenziale. Ciò è dovuto al fatto che in essi il momento trasferito è stato definito come $q=k'-k$.}
 \begin{equation*}
    f^{\rm Born}(\vb{k}, \vb{k'})
-   =-\frac{m}{2 \pi \hbar^3} \int \dd[3]{x} e^{i \vb{q} \vdot \vb{x}} V(\vb{x})
+   =-\frac{m}{2 \pi \hbar^2} \int \dd[3]{\vb{x}} e^{i \vb{q} \vdot \vb{x}} V(\vb{x})
 \end{equation*}
 e tale espressione risulta essere la trasformata di Fourier del potenziale $V(\vb{x})$.\\
-Nel caso di potenziali centrali, in cui $V(\vb{x}) \equiv V(r)$, la sezione d'urto differenziale si può esprimere come
+Nel caso di potenziali centrali, in cui $V(\vb{x}) \equiv V(r)$, la'ampiezza di scattering si può esprimere come
 \begin{equation*}
    f^{\rm Born}(\vartheta)
    =-\frac{2m}{\hbar^2} \int_{0}^{\infty} \dd{r} r V(r) \frac{\sin{(qr)}}{q}
 \end{equation*}
 Inoltre si può dimostrare che il modulo del momento trasferito è $q=2k \sin(\vartheta/2)$, dove $\vartheta$ è l'angolo di scattering tra $\vb{k}$ e $\vb{k'}$.
-%\subsubsection*{Partial wave expansion}
+\subsubsection*{Partial wave expansion}
+   \E possibile adoperare la partial wave analysis quando abbiamo un potenziale a simmetria sferica. Infatti, in una situazione del genere si conserva il momento angolare, dunque possiamo scrivere la situazione d'urto in termini di onde parziali (associate ai diversi valori di $\ell$), le quali scatteranno in maniera indipendente.\\
+   Bisogna inoltre considerare il fatto che quando abbiamo scattering elastico si deve conservare la probabilità, quindi il modulo quadro della funzione d'onda non può cambiare, ma può cambiare la fase. Quindi l'effetto di uno scattering è quello di creare un phase shift, cioè di modificare la fase dell'onda. La grandezza di tale phase shift dipenderà dall'intensità del potenziale.\\
+   Nel caso in cui sia possibile usare lo sviluppo in onde parziale, l'ampiezza di scattering può essere scritta come
+   \begin{equation*}
+      f_k(\vartheta)
+      =\frac{1}{k} \sum_{\ell=0}^{+\infty} (2\ell + 1) e^{i \delta_{\ell}} \sin{(\delta_{\ell})} P_{\ell}(\cos{\vartheta})
+   \end{equation*}
+   dove $P_{\ell}(\cos{\vartheta})$ sono i polinomi di Legendre.\\
+   La sezione d'urto può invece essere scritta come
+   \begin{equation*}
+      \sigma
+      =\frac{4\pi}{k^2} \sum_{\ell=0}^{+\infty} (2\ell + 1) \sin^2{(\delta_{\ell})}
+   \end{equation*}
+   In alcuni casi può essere utile adoperare la forma integrale del phase shift, la quale è data da
+   \begin{equation}
+      e^{i \delta_{\ell}} \sin{(\delta_{\ell})}
+      =-\frac{2m}{\hbar^2} k \int_{0}^{+\infty} \dd{r} r V(r) j_{\ell}(kr) u_{\ell}(kr)
+      \label{eq:phase_shift_integral}
+   \end{equation}
+   dove $j_{\ell}(kr)$ sono le funzioni sferiche di Bessel e $u_{\ell}(kr)$ sono le soluzioni dell'equazione radiale.\\
+   Spesso oltre a poter applicare l'analisi in onde parziali possiamo applicare anche l'approssimazione di Born perché il potenziale è piccolo rispetto all'energia della particella. In tal caso il phase shift $\delta_{\ell}$ sarà piccolo, dunque sono lecite le approssimazioni $e^{i \delta_{\ell}} \approx 1$ e $\sin{(\delta_{\ell})} \approx \delta_{\ell}$, dunque è possibile semplificare le formule finora scritte. Non solo: in tal caso la funzione $u_{\ell}$ è approssimabile con $r j_{\ell}$, dunque la formula \eqref{eq:phase_shift_integral} diventa
+   \begin{equation*}
+      \delta_{\ell}
+      =-\frac{2mk}{\hbar^2} \int_{0}^{+\infty} \dd{r} r^2 V(r) j_{\ell}(kr)^2
+   \end{equation*}
+   La partial wave analysis è utile soprattutto nel limite delle basse energie, in cui domina il contributo dei termini con $\ell$ più basso, per cui spesso già con solo il contributo del termine con $\ell=0$ otteniamo un'ottima approssimazione del risultato.
